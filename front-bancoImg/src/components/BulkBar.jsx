@@ -18,12 +18,7 @@ const BulkBar = ({
         <span className="text-white/80 text-sm">
           {selectedCount} seleccionada{selectedCount !== 1 ? 's' : ''}
         </span>
-        <button 
-          onClick={onBulkFav}
-          className="px-3 py-2 rounded-lg bg-white/10 hover:bg-white/20 text-white"
-        >
-          Marcar favorito
-        </button>
+        
         <button 
           onClick={onBulkTag}
           className="px-3 py-2 rounded-lg bg-white/10 hover:bg-white/20 text-white"

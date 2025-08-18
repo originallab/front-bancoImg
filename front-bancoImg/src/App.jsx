@@ -1,14 +1,13 @@
-// src/App.jsx - VERSIÓN COMPLETA
 import React, { useState } from 'react';
-import './styles.css';
 
+// Componente para la barra de navegación principal
 const MainSidebar = ({ currentDashboard, onDashboardChange }) => {
   const dashboards = [
-    { id: 'images', name: 'Banco de Imágenes', icon: '🖼️', color: '#1b96ff' },
-    { id: 'videos', name: 'Banco de Videos', icon: '🎥', color: '#10b981' },
-    { id: 'documents', name: 'Documentos', icon: '📄', color: '#f59e0b' },
-    { id: 'assets', name: 'Assets', icon: '🎨', color: '#8b5cf6' },
-    { id: 'analytics', name: 'Analytics', icon: '📊', color: '#ef4444' }
+    { id: 'images', name: 'Banco de imágenes', icon: '🖼️', color: '#1b96ff' },
+    { id: 'videos', name: 'Banco de imagenes- proyecto 1', icon: '🖼️', color: '#10b981' },
+    { id: 'documents', name: 'Banco de imagenes- proyecto 2', icon: '🖼️', color: '#f59e0b' },
+    { id: 'assets', name: 'Banco de imagenes- proyecto 3', icon: '🖼️', color: '#8b5cf6' },
+    { id: 'analytics', name: 'Banco de imagenes- proyecto 3', icon: '🖼️', color: '#ef4444' }
   ];
 
   return (
@@ -28,7 +27,6 @@ const MainSidebar = ({ currentDashboard, onDashboardChange }) => {
         </div>
         <div className="mt-4 text-xs text-white/70">Organiza imágenes por proyecto y álbum, con descripciones y etiquetas.</div>
       </div>
-
       <div className="p-4">
         <div className="text-xs uppercase tracking-wide text-white/50 mb-3">Dashboards</div>
         <div className="space-y-1">
@@ -37,12 +35,12 @@ const MainSidebar = ({ currentDashboard, onDashboardChange }) => {
               key={dashboard.id}
               onClick={() => onDashboardChange(dashboard.id)}
               className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl transition-all hover-rise ${
-                currentDashboard === dashboard.id 
-                  ? 'bg-white/15 shadow-soft' 
+                currentDashboard === dashboard.id
+                  ? 'bg-white/15 shadow-soft'
                   : 'hover:bg-white/10'
               }`}
             >
-              <span 
+              <span
                 className="w-10 h-10 rounded-lg grid place-items-center text-lg"
                 style={{ background: `linear-gradient(135deg, ${dashboard.color}, rgba(255,255,255,.2))` }}
               >
@@ -56,20 +54,20 @@ const MainSidebar = ({ currentDashboard, onDashboardChange }) => {
           ))}
         </div>
       </div>
-
       <div className="mt-auto p-4 border-t border-white/10">
         <div className="text-xs text-white/50 text-center">
-          Demo v1.0 - Canva Code
+          Demo- Banco de Imagenes
         </div>
       </div>
     </aside>
   );
 };
 
-const ProjectSidebar = ({ 
-  projects, 
-  currentProject, 
-  albums, 
+// Componente para la barra lateral del proyecto
+const ProjectSidebar = ({
+  projects,
+  currentProject,
+  albums,
   onProjectChange,
   onNewProject,
   onNewAlbum,
@@ -77,17 +75,17 @@ const ProjectSidebar = ({
   showToast
 }) => {
   return (
-    <aside className="w-[320px] min-w-[280px] bg-ink-800/80 glass border-r border-white/10 hidden md:flex md:flex-col">
+    <div className="hidden md:flex flex-col w-[320px] min-w-[280px] bg-ink-800/80 glass border-r border-white/10">
       <div className="p-4 flex gap-2">
-        <button 
+        <button
           onClick={onNewProject}
           className="flex-1 bg-brand-500 hover:bg-brand-600 transition rounded-lg px-4 py-2.5 font-semibold hover-rise text-white"
         >
           + Nuevo proyecto
         </button>
-        <button 
+        <button
           onClick={() => showToast('Editar proyecto')}
-          className="px-3 py-2 rounded-lg bg-white/10 hover:bg-white/15 transition hover-rise" 
+          className="px-3 py-2 rounded-lg bg-white/10 hover:bg-white/15 transition hover-rise"
           title="Editar info del proyecto"
         >
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
@@ -95,21 +93,20 @@ const ProjectSidebar = ({
           </svg>
         </button>
       </div>
-
       <div className="px-3 pb-4 overflow-y-auto">
         <div className="text-xs uppercase tracking-wide text-white/50 px-3 mb-2">Proyectos</div>
         <ul className="space-y-1">
           {projects.map(project => (
             <li key={project.id}>
-              <button 
+              <button
                 onClick={() => onProjectChange(project.id)}
                 className={`w-full flex items-center justify-between gap-3 px-3 py-2.5 rounded-lg transition ${
                   project.id === currentProject?.id ? 'bg-white/15' : 'hover:bg-white/10'
                 }`}
               >
                 <span className="flex items-center gap-3">
-                  <span 
-                    className="w-3 h-3 rounded-full" 
+                  <span
+                    className="w-3 h-3 rounded-full"
                     style={{ background: project.color }}
                   ></span>
                   <span className="text-left truncate max-w-[190px] text-white">{project.name}</span>
@@ -119,7 +116,6 @@ const ProjectSidebar = ({
             </li>
           ))}
         </ul>
-
         <div className="mt-6 text-xs uppercase tracking-wide text-white/50 px-3 mb-2">Álbumes</div>
         <ul className="space-y-1 px-2">
           {albums.length === 0 ? (
@@ -127,7 +123,7 @@ const ProjectSidebar = ({
           ) : (
             albums.map(album => (
               <li key={album.id}>
-                <button 
+                <button
                   onClick={() => onAlbumSelect(album.id)}
                   className="w-full text-left px-3 py-2 rounded-lg hover:bg-white/10 transition flex items-center justify-between text-white"
                 >
@@ -138,17 +134,16 @@ const ProjectSidebar = ({
             ))
           )}
         </ul>
-        
         <div className="px-2 mt-2 flex gap-2">
-          <button 
+          <button
             onClick={onNewAlbum}
             className="flex-1 bg-white/10 hover:bg-white/15 rounded-lg px-3 py-2 text-white"
           >
             + Nuevo álbum
           </button>
-          <button 
+          <button
             onClick={() => showToast('Gestionar álbumes')}
-            className="px-3 py-2 rounded-lg bg-white/10 hover:bg-white/15" 
+            className="px-3 py-2 rounded-lg bg-white/10 hover:bg-white/15"
             title="Renombrar/Eliminar"
           >
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
@@ -156,53 +151,32 @@ const ProjectSidebar = ({
             </svg>
           </button>
         </div>
-
-        <div className="mt-6 text-xs uppercase tracking-wide text-white/50 px-3 mb-2">Vistas rápidas</div>
-        <div className="space-y-1 px-2">
-          <button 
-            onClick={() => showToast('Mostrar todo')}
-            className="w-full flex items-center justify-between gap-2 px-3 py-2 rounded-lg hover:bg-white/10 transition text-white"
-          >
-            <span className="flex items-center gap-2">
-              <span className="w-2 h-2 rounded-full bg-brand-400"></span>
-              Todo (proyecto)
-            </span>
-            <span className="text-white/50">G</span>
-          </button>
-          <button 
-            onClick={() => showToast('Mostrar favoritos')}
-            className="w-full flex items-center justify-between gap-2 px-3 py-2 rounded-lg hover:bg-white/10 transition text-white"
-          >
-            <span className="flex items-center gap-2">
-              <span className="w-2 h-2 rounded-full bg-yellow-400"></span>
-              Favoritos
-            </span>
-            <span className="text-white/50">F</span>
-          </button>
-          <button 
-            onClick={() => showToast('Mostrar sin etiquetas')}
-            className="w-full flex items-center justify-between gap-2 px-3 py-2 rounded-lg hover:bg-white/10 transition text-white"
-          >
-            <span className="flex items-center gap-2">
-              <span className="w-2 h-2 rounded-full bg-pink-400"></span>
-              Sin etiquetas
-            </span>
-            <span className="text-white/50">U</span>
-          </button>
-        </div>
+        <div className="mt-6 text-xs uppercase tracking-wide text-white/50 px-3 mb-2"></div>
+        <div className="space-y-1 px-2"></div>
       </div>
-    </aside>
+    </div>
   );
 };
 
-const Header = ({ currentProject, albumTag }) => {
+// Componente para el encabezado
+const Header = ({ currentProject, albumTag, onProjectSidebarToggle }) => {
   return (
     <header className="sticky top-0 z-10 bg-ink-900/80 glass border-b border-white/10">
       <div className="max-w-7xl mx-auto px-4 lg:px-8 py-4">
         <div className="flex items-center gap-3">
+          {/* Botón de alternar visibilidad del sidebar del proyecto (solo para móvil) */}
+          <button
+            onClick={onProjectSidebarToggle}
+            className="md:hidden p-2 rounded-lg bg-white/10 hover:bg-white/20 text-white"
+            title="Mostrar/Ocultar proyectos"
+          >
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M3 12h18M3 6h18M3 18h18"/>
+            </svg>
+          </button>
           <div className="flex-1">
             <div className="flex items-center gap-3">
-              <div 
+              <div
                 className="w-10 h-10 rounded-xl grid place-items-center shadow-glow font-bold text-white"
                 style={{ background: `linear-gradient(135deg, ${currentProject?.color || '#1b96ff'}, rgba(255,255,255,.2))` }}
               >
@@ -243,27 +217,24 @@ const Header = ({ currentProject, albumTag }) => {
   );
 };
 
-const Toolbar = ({ 
+// Componente para la barra de herramientas
+const Toolbar = ({
   searchValue,
   onSearchChange,
   albumFilter,
   onAlbumFilterChange,
-  favoriteFilter,
-  onFavoriteToggle,
-  onUpload,
   albums,
-  showToast
 }) => {
   return (
     <div className="max-w-7xl mx-auto px-4 lg:px-8 py-4">
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-3">
         <div className="lg:col-span-5 relative">
-          <input 
-            type="text" 
-            placeholder="Buscar por nombre, descripción o etiqueta..." 
+          <input
+            type="text"
+            placeholder="Buscar por nombre, descripción o etiqueta..."
             value={searchValue}
             onChange={(e) => onSearchChange(e.target.value)}
-            className="w-full bg-white/10 border border-white/10 rounded-xl px-4 py-3 pr-10 placeholder-white/50 text-white focus:outline-none focus:ring-2 focus:ring-brand-500/50" 
+            className="w-full bg-white/10 border border-white/10 rounded-xl px-4 py-3 pr-10 placeholder-white/50 text-white focus:outline-none focus:ring-2 focus:ring-brand-500/50"
           />
           <div className="absolute right-3 top-1/2 -translate-y-1/2 text-white/60">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
@@ -273,7 +244,7 @@ const Toolbar = ({
           </div>
         </div>
         <div className="lg:col-span-3 flex gap-2">
-          <select 
+          <select
             value={albumFilter}
             onChange={(e) => onAlbumFilterChange(e.target.value)}
             className="flex-1 bg-white/10 border border-white/10 rounded-xl px-3 py-3 text-white focus:outline-none focus:ring-2 focus:ring-brand-500/50"
@@ -283,63 +254,17 @@ const Toolbar = ({
               <option key={album.id} value={album.id}>{album.name}</option>
             ))}
           </select>
-           {/*
-          <select className="w-40 bg-white/10 border border-white/10 rounded-xl px-3 py-3 text-white focus:outline-none focus:ring-2 focus:ring-brand-500/50">
-          
-            <option value="date_asc">Más antiguos</option>
-            <option value="name_asc">Nombre A-Z</option>
-            <option value="name_desc">Nombre Z-A</option>
-            <option value="fav_desc">Favoritos primero</option>
-          </select>
-          */}
-        </div>
-  
-          {/* <button 
-            onClick={onFavoriteToggle}
-            className={`px-4 py-3 rounded-xl flex items-center gap-2 transition ${
-              favoriteFilter 
-                ? 'bg-yellow-500/90 text-black' 
-                : 'bg-white/10 hover:bg-white/20 text-white'
-            }`}
-          >
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
-              <path d="M12 18l-6.16 3.24 1.18-6.88L2 9.76l6.92-1L12 2l3.08 6.76L22 9.76l-4.98 4.6 1.18 6.88z" stroke="currentColor" strokeWidth="1.3" fill="transparent"/>
-            </svg>
-            Favoritos
-          </button>
-        
-          
-          <button 
-            onClick={() => showToast('Modo selección')}
-            className="px-4 py-3 rounded-xl bg-white/10 hover:bg-white/20 text-white"
-          >
-            Seleccionar
-          </button>
-           */}
-          
-          <button 
-            onClick={() => showToast('Filtros limpiados')}
-            //className="px-4 py-3 rounded-xl bg-white/5 hover:bg-white/15 text-white"
-          >
-            Limpiar
-          </button>
-          <button 
-            onClick={onUpload}
-            className="bg-brand-500 hover:bg-brand-600 shadow-glow rounded-xl px-4 py-3 font-semibold text-white"
-          >
-            Subir
-          </button>
-          
         </div>
       </div>
- 
+    </div>
   );
 };
 
+// Componente para la zona de carga
 const DropZone = ({ onDrop }) => {
   return (
     <section className="max-w-7xl mx-auto px-4 lg:px-8 py-8">
-      <div 
+      <div
         onClick={onDrop}
         className="rounded-2xl border-2 border-dashed border-white/20 bg-ink-800/60 hover:bg-ink-700/50 transition p-6 lg:p-8 text-center hover-rise cursor-pointer"
       >
@@ -360,6 +285,7 @@ const DropZone = ({ onDrop }) => {
   );
 };
 
+// Componente para la fila de etiquetas
 const TagsRow = ({ tags, selectedTag, onTagSelect }) => {
   if (!tags.length) return null;
 
@@ -369,8 +295,8 @@ const TagsRow = ({ tags, selectedTag, onTagSelect }) => {
         <button
           onClick={() => onTagSelect(null)}
           className={`tag px-3 py-1.5 rounded-full border border-white/10 transition ${
-            !selectedTag 
-              ? 'bg-brand-500 text-white' 
+            !selectedTag
+              ? 'bg-brand-500 text-white'
               : 'bg-white/5 hover:bg-white/10 text-white'
           }`}
         >
@@ -381,8 +307,8 @@ const TagsRow = ({ tags, selectedTag, onTagSelect }) => {
             key={tag}
             onClick={() => onTagSelect(tag)}
             className={`tag px-3 py-1.5 rounded-full border border-white/10 transition ${
-              selectedTag === tag 
-                ? 'bg-brand-500 text-white' 
+              selectedTag === tag
+                ? 'bg-brand-500 text-white'
                 : 'bg-white/5 hover:bg-white/10 text-white'
             }`}
           >
@@ -394,6 +320,7 @@ const TagsRow = ({ tags, selectedTag, onTagSelect }) => {
   );
 };
 
+// Componente para la galería de imágenes
 const Gallery = ({ images, showToast }) => {
   if (!images.length) {
     return (
@@ -411,7 +338,7 @@ const Gallery = ({ images, showToast }) => {
         {images.map((img) => (
           <div key={img.id} className="hover-rise bg-ink-800/60 border border-white/10 rounded-xl overflow-hidden">
             <div className="relative group">
-              <div 
+              <div
                 className="w-full h-44 grid place-items-center text-white font-bold text-4xl"
                 style={{ background: `linear-gradient(135deg, ${img.color}, rgba(255,255,255,.2))` }}
               >
@@ -419,17 +346,17 @@ const Gallery = ({ images, showToast }) => {
               </div>
               <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition"></div>
               <div className="absolute top-2 right-2 flex gap-2 opacity-0 group-hover:opacity-100 transition">
-                <button 
+                <button
                   onClick={() => showToast(`${img.favorite ? 'Quitar' : 'Marcar'} favorito`)}
                   className={`px-2 py-1 rounded-lg ${
-                    img.favorite 
-                      ? 'bg-yellow-400 text-black' 
+                    img.favorite
+                      ? 'bg-yellow-400 text-black'
                       : 'bg-white/20 hover:bg-white/30 text-white'
                   }`}
                 >
                   ★
                 </button>
-                <button 
+                <button
                   onClick={() => showToast('Abrir imagen')}
                   className="px-2 py-1 rounded-lg bg-white/20 hover:bg-white/30 text-white"
                 >
@@ -442,9 +369,9 @@ const Gallery = ({ images, showToast }) => {
                 <div className="font-semibold line-clamp-1 text-white" title={img.name}>
                   {img.name}
                 </div>
-                <button 
+                <button
                   onClick={() => showToast('Eliminar imagen')}
-                  className="text-white/70 hover:text-red-400" 
+                  className="text-white/70 hover:text-red-400"
                   title="Eliminar"
                 >
                   🗑️
@@ -469,6 +396,7 @@ const Gallery = ({ images, showToast }) => {
   );
 };
 
+// Componente para el mensaje flotante (toast)
 const Toast = ({ message }) => {
   if (!message) return null;
   return (
@@ -480,33 +408,31 @@ const Toast = ({ message }) => {
   );
 };
 
+// Componente principal de la aplicación
 const App = () => {
   const [currentDashboard, setCurrentDashboard] = useState('images');
   const [currentProject, setCurrentProject] = useState({
     id: '1',
-    name: 'Portafolio Web',
+    name: 'Banco de imagenes',
     color: '#1b96ff',
-    desc: 'Mockups y recursos web',
+    desc: 'Recursos de imagenes por proyecto',
     coverAlbumId: ''
   });
-  
   const [projects] = useState([
     { id: '1', name: 'Portafolio Web', color: '#1b96ff', desc: 'Mockups y recursos web', coverAlbumId: '' },
     { id: '2', name: 'Redes Sociales', color: '#f59e0b', desc: 'Creatividades para IG/FB', coverAlbumId: '' }
   ]);
-  
   const [albums] = useState([
     { id: 'a1', name: 'Portada' },
     { id: 'a2', name: 'Bocetos' }
   ]);
-  
   const [images] = useState([
     {
       id: 'img1',
       name: 'Mockup portada',
       desc: 'Hero principal del sitio',
       color: '#ef4444',
-      tags: ['hero', 'mockup'],
+      tags: ['pruebas', 'imagenes'],
       favorite: true,
       date: Date.now() - 86400000 * 2,
       w: 1200,
@@ -518,7 +444,7 @@ const App = () => {
       name: 'Hero 01',
       desc: 'Variación con CTA',
       color: '#10b981',
-      tags: ['hero'],
+      tags: ['imagenes'],
       favorite: false,
       date: Date.now() - 86400000,
       w: 1000,
@@ -530,7 +456,7 @@ const App = () => {
       name: 'Wireframe UX',
       desc: 'Estructura del sitio',
       color: '#1b96ff',
-      tags: ['ux', 'web'],
+      tags: ['pruebas 1', 'pruebas 2'],
       favorite: false,
       date: Date.now(),
       w: 900,
@@ -545,6 +471,7 @@ const App = () => {
   const [albumFilter, setAlbumFilter] = useState('');
   const [favoriteFilter, setFavoriteFilter] = useState(false);
   const [selectedTag, setSelectedTag] = useState(null);
+  const [isProjectSidebarCollapsed, setIsProjectSidebarCollapsed] = useState(false);
 
   const showToast = (message) => {
     setToastMessage(message);
@@ -560,6 +487,11 @@ const App = () => {
     const project = projects.find(p => p.id === projectId);
     setCurrentProject(project);
     showToast('Proyecto cambiado');
+  };
+
+  // This function is now just for show/hide on mobile, not for a collapsing transition
+  const handleProjectSidebarToggle = () => {
+    setIsProjectSidebarCollapsed(!isProjectSidebarCollapsed);
   };
 
   // Obtener etiquetas únicas
@@ -583,80 +515,87 @@ const App = () => {
 
       <div className="flex min-h-[calc(100vh-40px)]">
         {/* Sidebar principal de navegación */}
-        <MainSidebar 
+        <MainSidebar
           currentDashboard={currentDashboard}
           onDashboardChange={handleDashboardChange}
         />
 
-        {/* Sidebar del proyecto (solo visible en dashboard de imágenes) */}
-        {currentDashboard === 'images' && (
-          <ProjectSidebar
-            projects={projects}
-            currentProject={currentProject}
-            albums={albums}
-            onProjectChange={handleProjectChange}
-            onNewProject={() => showToast('Crear nuevo proyecto')}
-            onNewAlbum={() => showToast('Crear nuevo álbum')}
-            onAlbumSelect={(albumId) => setAlbumFilter(albumId)}
-            showToast={showToast}
-          />
-        )}
-
-        {/* Contenido principal */}
-        <main className="flex-1 flex flex-col">
-          {currentDashboard === 'images' ? (
-            <>
-              {/* Header */}
-              <Header
-                currentProject={currentProject}
-                albumTag={albumFilter ? albums.find(a => a.id === albumFilter)?.name : null}
-              />
-
-              {/* Toolbar */}
-              <Toolbar
-                searchValue={searchValue}
-                onSearchChange={setSearchValue}
-                albumFilter={albumFilter}
-                onAlbumFilterChange={setAlbumFilter}
-                favoriteFilter={favoriteFilter}
-                onFavoriteToggle={() => setFavoriteFilter(!favoriteFilter)}
-                onUpload={() => showToast('Subir archivos')}
-                albums={albums}
-                showToast={showToast}
-              />
-
-              {/* Drop zone */}
-              <DropZone onDrop={() => showToast('Zona de arrastre clickeada')} />
-
-              {/* Tags */}
-              <TagsRow
-                tags={allTags}
-                selectedTag={selectedTag}
-                onTagSelect={setSelectedTag}
-              />
-
-              {/* Gallery */}
-              <Gallery
-                images={filteredImages}
-                showToast={showToast}
-              />
-            </>
-          ) : (
-            // Otros dashboards
-            <div className="flex-1 flex items-center justify-center">
-              <div className="text-center">
-                <div className="text-6xl mb-4">🚧</div>
-                <h2 className="text-2xl font-bold mb-2">Dashboard en construcción</h2>
-                <p className="text-white/60">
-                  {currentDashboard === 'videos' && 'Banco de Videos próximamente'}
-                  {currentDashboard === 'documents' && 'Gestión de Documentos próximamente'}
-                  {currentDashboard === 'assets' && 'Gestión de Assets próximamente'}
-                  {currentDashboard === 'analytics' && 'Analytics próximamente'}
-                </p>
-              </div>
-            </div>
+        {/* Contenedor para ambos sidebars */}
+        <div className="flex">
+          {/* Sidebar del proyecto (solo visible en dashboard de imágenes) */}
+          {currentDashboard === 'images' && (
+            <ProjectSidebar
+              projects={projects}
+              currentProject={currentProject}
+              albums={albums}
+              onProjectChange={handleProjectChange}
+              onNewProject={() => showToast('Crear nuevo proyecto')}
+              onNewAlbum={() => showToast('Crear nuevo álbum')}
+              onAlbumSelect={(albumId) => setAlbumFilter(albumId)}
+              showToast={showToast}
+              isCollapsed={isProjectSidebarCollapsed}
+              onToggle={handleProjectSidebarToggle}
+            />
           )}
-        </main>
+
+          {/* Contenido principal */}
+          <main className="flex-1 flex flex-col">
+            {currentDashboard === 'images' ? (
+              <>
+                {/* Header */}
+                <Header
+                  currentProject={currentProject}
+                  albumTag={albumFilter ? albums.find(a => a.id === albumFilter)?.name : null}
+                  isProjectSidebarCollapsed={isProjectSidebarCollapsed}
+                  onProjectSidebarToggle={handleProjectSidebarToggle}
+                />
+
+                {/* Toolbar */}
+                <Toolbar
+                  searchValue={searchValue}
+                  onSearchChange={setSearchValue}
+                  albumFilter={albumFilter}
+                  onAlbumFilterChange={setAlbumFilter}
+                  favoriteFilter={favoriteFilter}
+                  onFavoriteToggle={() => setFavoriteFilter(!favoriteFilter)}
+                  onUpload={() => showToast('Subir archivos')}
+                  albums={albums}
+                  showToast={showToast}
+                />
+
+                {/* Drop zone */}
+                <DropZone onDrop={() => showToast('Zona de arrastre clickeada')} />
+
+                {/* Tags */}
+                <TagsRow
+                  tags={allTags}
+                  selectedTag={selectedTag}
+                  onTagSelect={setSelectedTag}
+                />
+
+                {/* Gallery */}
+                <Gallery
+                  images={filteredImages}
+                  showToast={showToast}
+                />
+              </>
+            ) : (
+              // Otros dashboards
+              <div className="flex-1 flex items-center justify-center">
+                <div className="text-center">
+                  <div className="text-6xl mb-4">🚧</div>
+                  <h2 className="text-2xl font-bold mb-2">Dashboard en construcción</h2>
+                  <p className="text-white/60">
+                    {currentDashboard === 'videos' && 'Banco de Videos próximamente'}
+                    {currentDashboard === 'documents' && 'Gestión de Documentos próximamente'}
+                    {currentDashboard === 'assets' && 'Gestión de Assets próximamente'}
+                    {currentDashboard === 'analytics' && 'Analytics próximamente'}
+                  </p>
+                </div>
+              </div>
+            )}
+          </main>
+        </div>
       </div>
 
       {/* Toast */}

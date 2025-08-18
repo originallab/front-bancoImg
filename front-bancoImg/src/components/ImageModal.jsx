@@ -37,9 +37,7 @@ const ImageModal = ({
             <div className="w-8 h-8 rounded-lg bg-brand-500 grid place-items-center">🖼️</div>
             <div>
               <div className="font-semibold text-white">Vista previa</div>
-              <div className="text-xs text-white/60">
-                {image.favorite ? '★ Favorito' : '•'} · {image.tags?.length ? `#${image.tags.join(' #')}` : 'Sin etiquetas'}
-              </div>
+              
             </div>
           </div>
           <div className="flex items-center gap-2">
